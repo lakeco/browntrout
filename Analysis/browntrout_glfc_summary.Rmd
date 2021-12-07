@@ -108,9 +108,7 @@ missing_coords <- df %>%
   select("latitude", "longitude") %>%
   summarise_all(funs(sum(is.na(.))))
 
-
-
-df10 <- read.csv("~/projects/brown/Data/Spatial/gl_10min_grid.csv", stringsAsFactors = FALSE)
+df10 <- read.csv("~/projects/browntrout/Data/Spatial/gl_10min_grid.csv", stringsAsFactors = FALSE)
 
 df10 <- df10%>% rename(
   grid_10min = CELL10MIN,
@@ -119,7 +117,7 @@ df10 <- df10%>% rename(
 )
 
 
-df <- left_join(df, df10)
+df <- left_join(df, df10, by = c("grid_10min","lake"))
 
 missing_coords_2 <- df %>%
   select("lat_grid", "lon_grid") %>%
@@ -375,7 +373,7 @@ fig4 + facet_grid(lake ~., scales="free") +
 
 ## Map
 
-Stocking events aggregated by stocking site (spring yearlings only).  Radius of circle indicates biomass (kg) stocked
+Stocking events aggregated by stocking site (spring yearlings only).  Radius of circle indicates number of fish (1000's) stocked.  A small number (n=7) events could not be mapped due to errors in grid assignment.
 
 ```{r MAP}
 
@@ -407,7 +405,7 @@ map <- leaflet(width = "100%", height = 800) %>%
   addProviderTiles("Esri.WorldStreetMap", group = "Road map") %>%
   addProviderTiles("Esri.WorldImagery", group = "Satellite") %>%
   addProviderTiles("CartoDB.Positron", group = "Gray Scale") %>%
-  addCircleMarkers(data = sd, lat = ~lat_grid, lng = ~lon_grid, radius = ~biomass/100,
+  addCircleMarkers(data = sd, lat = ~lat_grid, lng = ~lon_grid, radius = ~number/1000,
                    stroke = TRUE,
                    color = "black",
                    weight = 1,
