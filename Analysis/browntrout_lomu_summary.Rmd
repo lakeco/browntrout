@@ -47,7 +47,7 @@ library(crosstalk)
 library(leaflet)
 library(rgdal)
 
-load(file = "Data/Processed/lkonstock.rda")
+load(file = "~/projects/browntrout/Data/Processed/lkonstock.rda")
 
 df <- lkonstock
 
@@ -516,7 +516,7 @@ Stocking events aggregated by stocking site (spring yearlings only).  Radius of 
 
 ```{r MAP}
 
-zone <- readOGR("Data/Spatial/stockingzone.kml", verbose = FALSE)
+zone <- readOGR("~/projects/browntrout/Data/Spatial/stockingzone.kml", verbose = FALSE)
 
 # create stocking zone number labels
 zonenum <- read.csv(textConnection("
