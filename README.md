@@ -7,7 +7,10 @@ GEAR: Other<br />
  
 # Abstract
  
-Please provide a simple description of the project
+Data cleanup using three data sources:
+* FSIS data for LOMU
+* FSIS data for the entire province of Ontario (GL and inland)
+* GLFC data for all Great Lakes
  
 # Folder Description
  
