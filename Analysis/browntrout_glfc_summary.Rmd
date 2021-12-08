@@ -48,7 +48,7 @@ library(rgdal)
 library(lubridate)
 library(modelsummary)
 
-df <- read.csv("~/projects/brown/Data/Raw/bt_glfc.csv") # previously downloaded - brown trout only
+df <- read.csv("~/projects/browntrout/Data/Raw/bt_glfc.csv") # previously downloaded - brown trout only
 
 # only one state has entered 2020 data, so let's remove that
 
@@ -57,7 +57,7 @@ df <- df %>% subset(year !="2020")
 # first, fix up the data set so it's more usable
 
 # bring in lookup table from GLFC data template - make stage variable that is 'plain language' instead of a code
-stglkup <- read_xlsx("~/projects/brown/Data/Lookup/GLFSD_NewDataSubmission_Template.xlsx", sheet = "Lifestage")
+stglkup <- read_xlsx("~/projects/browntrout/Data/Lookup/GLFSD_NewDataSubmission_Template.xlsx", sheet = "Lifestage")
 stglkup <- stglkup %>% rename(life_stage = stage)
 stglkup$stage <- gsub("(.*),.*", "\\1", stglkup$description)
 stglkup$stage[stglkup$life_stage == "a"] <- "adult"
