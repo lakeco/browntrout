@@ -31,7 +31,7 @@ knitr::opts_chunk$set(fig.width=10, fig.height=7, echo=FALSE, message=FALSE, war
 
 #knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width=9, fig.height=8)
-source("~/projects/themes/theme_gfs.R")
+#source("~/projects/themes/theme_gfs.R")
 
 library(tidyr)
 library(dplyr)
@@ -47,7 +47,7 @@ library(crosstalk)
 library(leaflet)
 library(rgdal)
 
-load(file = "~/projects/browntrout/Data/Processed/lkonstock.rda")
+load(file = "Data/Processed/lkonstock.rda")
 
 df <- lkonstock
 
@@ -444,7 +444,7 @@ fig4 <-ggplot(releasedate, aes(x=STOCKING_YEAR, y=avg, label = datelabel)) +
   theme(plot.title = element_text(hjust = 0.5))+
   scale_x_continuous (breaks = seq(minyr, maxyr, by=2))+
   theme(legend.position = c(.2, .8)) + 
-  theme_gfs()+ 
+  #theme_gfs()+ 
   theme(axis.text.x=element_text(size=16))+
   geom_text(hjust = 0, nudge_x = 0.12, size = 3) + 
   expand_limits(x = 2020.5)
@@ -493,7 +493,7 @@ fig5b <-ggplot(temp, aes(x=STOCKING_YEAR, y=avg, label = tlabel)) +
   theme(plot.title = element_text(hjust = 0.5))+
   scale_x_continuous (breaks = seq(minyr, maxyr, by=2))+
   theme(legend.position = c(.2, .8)) + 
-  theme_gfs()+ 
+  #theme_gfs()+ 
   theme(axis.text.x=element_text(size=16))+
   #theme(axis.text.y=element_text(size=20))+
   geom_text(hjust = 0, nudge_x = 0.12, size = 3) + 
@@ -516,7 +516,7 @@ Stocking events aggregated by stocking site (spring yearlings only).  Radius of 
 
 ```{r MAP}
 
-zone <- readOGR("~/projects/browntrout/Data/Spatial/stockingzone.kml", verbose = FALSE)
+zone <- readOGR("Data/Spatial/stockingzone.kml", verbose = FALSE)
 
 # create stocking zone number labels
 zonenum <- read.csv(textConnection("
@@ -600,7 +600,13 @@ bscols(widths = c(3,12),
 
 
 ```
-
+```{js}
+function filter_default() {
+    document.getElementById("STOCKING_YEAR").getElementsByClassName("selectized") 
+[0].selectize.setValue("2021", false);
+ }
+window.onload = filter_default;
+```
 <br><hr style="border:1px solid gray"> </hr><br>
 
 <a href="#header">back to top</a>

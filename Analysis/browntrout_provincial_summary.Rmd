@@ -51,7 +51,7 @@ library(ggplot2)
 library(here)
 
 
-load(file = "~/projects/browntrout/Data/Processed/brown_fsis.rda")
+load(file = "Data/Processed/brown_fsis.rda")
 
 df <- brown_fsis
 
@@ -409,7 +409,7 @@ df2 <- df %>%
     )
 
 #fmz <- readOGR(dsn = "Data/Spatial",layer = "FMZ", verbose = FALSE)
-fmz <- readOGR("~/projects/browntrout/Data/Spatial/fmz.kml", verbose = FALSE)
+fmz <- readOGR("Data/Spatial/fmz.kml", verbose = FALSE)
 
 coordinates(df2) <- c("LONGITUDE","LATITUDE")
 
@@ -420,7 +420,7 @@ df3 <- as.data.frame(df2) # turns spatial data frame into normal data frame; use
 
 # some of the stocking sites on the margins of FMZ 20 should be considered part of FMZ 20:
 
-zone20 <- read.csv("~/projects/browntrout/Data/Lookup/fmzcorrection.csv", stringsAsFactors = FALSE)
+zone20 <- read.csv("Data/Lookup/fmzcorrection.csv", stringsAsFactors = FALSE)
 
 df3 <- left_join(df3, zone20, by = "STOCKING_SITE_ID")
 

@@ -48,7 +48,7 @@ library(rgdal)
 library(lubridate)
 library(modelsummary)
 
-df <- read.csv("~/projects/browntrout/Data/Raw/bt_glfc.csv") # previously downloaded - brown trout only
+df <- read.csv("Data/Raw/bt_glfc.csv") # previously downloaded - brown trout only
 
 # only one state has entered 2020 data, so let's remove that
 
@@ -57,7 +57,7 @@ df <- df %>% subset(year !="2020")
 # first, fix up the data set so it's more usable
 
 # bring in lookup table from GLFC data template - make stage variable that is 'plain language' instead of a code
-stglkup <- read_xlsx("~/projects/browntrout/Data/Lookup/GLFSD_NewDataSubmission_Template.xlsx", sheet = "Lifestage")
+stglkup <- read_xlsx("Data/Lookup/GLFSD_NewDataSubmission_Template.xlsx", sheet = "Lifestage")
 stglkup <- stglkup %>% rename(life_stage = stage)
 stglkup$stage <- gsub("(.*),.*", "\\1", stglkup$description)
 stglkup$stage[stglkup$life_stage == "a"] <- "adult"
@@ -108,7 +108,7 @@ missing_coords <- df %>%
   select("latitude", "longitude") %>%
   summarise_all(funs(sum(is.na(.))))
 
-df10 <- read.csv("~/projects/browntrout/Data/Spatial/gl_10min_grid.csv", stringsAsFactors = FALSE)
+df10 <- read.csv("Data/Spatial/gl_10min_grid.csv", stringsAsFactors = FALSE)
 
 df10 <- df10%>% rename(
   grid_10min = CELL10MIN,
@@ -435,6 +435,13 @@ bscols(widths = c(3,12),
 )
 
 
+```
+```{js}
+function filter_default() {
+    document.getElementById("year").getElementsByClassName("selectized") 
+[0].selectize.setValue("2019", false);
+ }
+window.onload = filter_default;
 ```
 
 <br><hr style="border:1px solid gray"> </hr><br>
